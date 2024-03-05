@@ -34,12 +34,12 @@ int main(){
       h_idata[m] = m;
    }
 
-   cudaMemcpy(d_idata, h_idata, 100, cudaMemcpyHostToDevice);
+   cudaMemcpy(d_idata, h_idata, 100*sizeof(int), cudaMemcpyHostToDevice);
    cudaDeviceSynchronize();
 
    hellofromgpu<<<1, 100>>>(d_idata, d_odata);
 
-   cudaMemcpy(h_odata, d_odata, 100, cudaMemcpyDeviceToHost);
+   cudaMemcpy(h_odata, d_odata, 100*sizeof(int), cudaMemcpyDeviceToHost);
    cudaDeviceSynchronize();
 
    free(h_idata);
